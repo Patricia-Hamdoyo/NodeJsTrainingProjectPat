@@ -7,11 +7,11 @@ const app = express();
 app.use(express.json());
 
 const profiles = [
-    { id: 1, name: 'Jhone Doue', email: 'company@demo.com', password:'NewPassword' },
-    { id: 2, name: 'Digma', email: 'digma@gmail.com', password:'everLasting14324' },
-    { id: 3, name: 'Leaf', email: 'leafens@gmail.com', password: 'Leaf25229' },
-    { id: 4, name: 'Ciagyu', email: 'ciagyu@gmail.com', password: 'ciaGyu5229' },
-    { id: 5, name: 'Kevin', email: 'kevin@hotmail.com', password: 'Kev1n14783' }
+    { id: 1, fullname: 'Jhone Doue', name: 'Jhone Doue', email: 'company@demo.com', password:'NewPassword' },
+    { id: 2, fullname: 'Paradigma', name: 'Digma', email: 'digma@gmail.com', password:'everLasting14324' },
+    { id: 3, fullname: 'Leafens', name: 'Leaf', email: 'leafens@gmail.com', password: 'Leaf25229' },
+    { id: 4, fullname: 'Cia Gyu', name: 'Ciagyu', email: 'ciagyu@gmail.com', password: 'ciaGyu5229' },
+    { id: 5, fullname: 'Kevin HA', name: 'Kevin', email: 'kevin@hotmail.com', password: 'Kev1n14783' }
 ];
 
 app.use((req, res, next) => {
@@ -45,7 +45,10 @@ app.post('/api/profiles', (req, res) => {
 
     const profile = {
         id: profiles.length + 1,
-        name: req.body.name
+        fullname: req.body.fullname,
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
     };
     profiles.push(profile);
     return res.json(profile);

