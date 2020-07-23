@@ -87,7 +87,7 @@
             <input type="checkbox" class="form-check-input">
             <label class="form-check-label">Agree with <a href="#">Terms and Conditions</a></label>
           </div>
-          <button class="btn btn-filled btn-round" onclick="VerifyRegister()">Signup</button> <!--<span class="bh"></span> <span>Signup</span>-->
+          <button type="button" class="btn btn-filled btn-round" onclick="VerifyRegister()">Signup</button>
           <p class="notice">Already have an account? <a href="login.html">Login Account</a></p>
         </form>
       </div>
@@ -124,7 +124,7 @@
 
           var data = {};
           data.fullname = register_fullname;
-          data.name = register_username;
+          data.username = register_username;
 		      data.email = register_email;
 		      data.password = register_pass;
 					var json = JSON.stringify(data);

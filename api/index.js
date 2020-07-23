@@ -7,11 +7,11 @@ const app = express();
 app.use(express.json());
 
 const profiles = [
-    { id: 1, name: 'Jhone Doue', username: 'Jhone Doue', email: 'company@demo.com', password:'NewPassword' },
-    { id: 2, name: 'Paradigma', username: 'Digma', email: 'digma@gmail.com', password:'everLasting14324' },
-    { id: 3, name: 'Leafens', username: 'Leaf', email: 'leafens@gmail.com', password: 'Leaf25229' },
-    { id: 4, name: 'Cia Gyu', username: 'Ciagyu', email: 'ciagyu@gmail.com', password: 'ciaGyu5229' },
-    { id: 5, name: 'Kevin HA', username: 'Kevin', email: 'kevin@hotmail.com', password: 'Kev1n14783' }
+    { id: 1, fullname: 'Jhone Doue', username: 'Jhone Doue', email: 'company@demo.com', password:'NewPassword' },
+    { id: 2, fullname: 'Paradigma', username: 'Digma', email: 'digma@gmail.com', password:'everLasting14324' },
+    { id: 3, fullname: 'Leafens', username: 'Leaf', email: 'leafens@gmail.com', password: 'Leaf25229' },
+    { id: 4, fullname: 'Cia Gyu', username: 'Ciagyu', email: 'ciagyu@gmail.com', password: 'ciaGyu5229' },
+    { id: 5, fullname: 'Kevin HA', username: 'Kevin', email: 'kevin@hotmail.com', password: 'Kev1n14783' }
 ];
 
 app.use((req, res, next) => {
@@ -40,12 +40,12 @@ app.get('/api/profiles/:id', (req, res) => {
 app.post('/api/profiles', (req, res) => {
     const {error} = validateProfile(req.body);
     if (error) {
-        return res.status(400).send(error); //error.details[0].message
+        return res.status(400).send(error); //error.details[0].message (pas terakhir aja)
     }
 
     const profile = {
         id: profiles.length + 1,
-        name: req.body.name,
+        fullname: req.body.fullname,
         username: req.body.username,
         email: req.body.email,
         password: req.body.password
@@ -62,7 +62,7 @@ app.put('/api/profiles/:id', (req, res) => {
     const profile = profiles.find( p => p.id === parseInt(req.params.id) );
     if (!profile) return res.status(404).send('ID not found.');
 
-    profile.name = req.body.name;
+    profile.fullname = req.body.fullname;
     profile.username = req.body.username;
     profile.email = req.body.email;
     profile.password = req.body.password;
@@ -85,7 +85,10 @@ app.listen(port, () => {
 
 function validateProfile(profile) {
     const schema = Joi.object({
-        name: Joi.string().min(3).required()
+        fullname: Joi.string().min(3).required(),
+        username: Joi.string().required(),
+        email: Joi.string().required(),
+        password: Joi.string().min(6).required()
     });
 
     return schema.validate(profile);

