@@ -105,19 +105,19 @@
         var data = {};
         data.username_email = login_email_username;
 		    data.password = login_password;
-				var json = JSON.stringify(data);
-
-				//copas aja ini
+        var json = JSON.stringify(data);
+        
 		    var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-		    xhr.setRequestHeader('Content-type','application/json; charset=utf-8'); //menyesuaikan parser
-		    xhr.onload = function() {
+        xhr.open('GET', url+"/"+login_email_username+"/"+login_password, true);
+        xhr.setRequestHeader('Content-type','application/json; charset=utf-8'); //menyesuaikan parser
+        console.log("Ready to take surat perintah...");
+		    xhr.onload = function() { //surat perintah
           console.log(xhr.responseText);
           
           //harusnya cek data
           var respond = JSON.parse(xhr.responseText);
           if (xhr.readyState == 4 && xhr.status == "200") {
-            alert("You have been successfully login. Welcome to your personal account!");
+            alert(`Hello ${login_email_username}! You have been successfully login. Welcome to your personal account!`);
           } else {
             console.error(respond);
             alert(respond.message);
