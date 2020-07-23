@@ -65,7 +65,7 @@
         <form action="#" class="sl-form">
           <div class="form-group">
             <label>Email or Username</label>
-            <input id="login_email_username" type="email" placeholder="example@example.com" required>
+            <input id="login_email_username" type="text" placeholder="example@example.com" required>
           </div>
           <div class="form-group">
             <label>Password</label>
@@ -100,7 +100,30 @@
         login_email_username = document.getElementById('login_email_username').value;
         login_password = document.getElementById('login_password').value;
 
-        
+        var url = "http://localhost:3000/api/profiles";
+
+        var data = {};
+        data.username_email = login_email_username;
+		    data.password = login_password;
+				var json = JSON.stringify(data);
+
+				//copas aja ini
+		    var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+		    xhr.setRequestHeader('Content-type','application/json; charset=utf-8'); //menyesuaikan parser
+		    xhr.onload = function() {
+          console.log(xhr.responseText);
+          
+          //harusnya cek data
+          var respond = JSON.parse(xhr.responseText);
+          if (xhr.readyState == 4 && xhr.status == "200") {
+            alert("You have been successfully login. Welcome to your personal account!");
+          } else {
+            console.error(respond);
+            alert(respond.message);
+          }
+		    }
+		    xhr.send(json);
         //kl username, email, or pass salah, muncul alert buat ngasih tau
       }
     </script>
