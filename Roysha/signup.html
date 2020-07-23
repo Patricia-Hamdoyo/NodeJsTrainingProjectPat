@@ -65,23 +65,23 @@
         <form method="post" class="sl-form">
           <div class="form-group">
             <label>Full Name</label>
-            <input type="text" id="register-fullname" placeholder="Full Name" required>
+            <input type="text" id="register_fullname" placeholder="Full Name" required>
           </div>
           <div class="form-group">
             <label>Username</label>
-            <input type="text" id="register-username" placeholder="Username for this account" required>
+            <input type="text" id="register_username" placeholder="Username for this account" required>
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input type="email" id="register-email" placeholder="example@gmail.com" required>
+            <input type="email" id="register_email" placeholder="example@gmail.com" required>
           </div>
           <div class="form-group">
             <label>Password</label>
-            <input type="password" id="register-password" placeholder="Password" required>
+            <input type="password" id="register_password" placeholder="Password" required>
           </div>
           <div class="form-group">
             <label>Confirm Password</label>
-            <input type="password" id="register-confirm-password" placeholder="Confirm Password" required>
+            <input type="password" id="register_confirm_password" placeholder="Confirm Password" required>
           </div>
           <div class="form-check">
             <input type="checkbox" class="form-check-input">
@@ -110,11 +110,11 @@
     <script>
       function VerifyRegister(){
 
-        register_fullname = document.getElementById('register-fullname').value;
-        register_email = document.getElementById('register-email').value;
-        register_username = document.getElementById('register-username').value;
-        register_pass = document.getElementById('register-password').value;
-        register_confirm_pass = document.getElementById('register-confirm-password').value;
+        register_fullname = document.getElementById('register_fullname').value;
+        register_email = document.getElementById('register_email').value;
+        register_username = document.getElementById('register_username').value;
+        register_pass = document.getElementById('register_password').value;
+        register_confirm_pass = document.getElementById('register_confirm_password').value;
 
         if( register_pass != register_confirm_pass ){
 					alert('Your password does not match');
@@ -131,7 +131,7 @@
 
 					//copas aja ini
 		      var xhr = new XMLHttpRequest();
-		      xhr.open('POST', url, true);
+          xhr.open('POST', url, true);
 		      xhr.setRequestHeader('Content-type','application/json; charset=utf-8'); //menyesuaikan parser
 		      xhr.onload = function() {
             console.log(xhr.responseText);
