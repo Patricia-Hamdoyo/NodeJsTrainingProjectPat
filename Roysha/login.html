@@ -111,11 +111,13 @@
         xhr.open('GET', url+"/"+login_email_username+"/"+login_password, true);
         xhr.setRequestHeader('Content-type','application/json; charset=utf-8'); //menyesuaikan parser
         console.log("Ready to take surat perintah...");
-		    xhr.onload = function() { //surat perintah
+        xhr.onload = function() { //surat perintah
+          // alert('masuk function');
           console.log(xhr.responseText);
+          // alert('lewatin xhr.responseText');
           
-          //harusnya cek data
           var respond = JSON.parse(xhr.responseText);
+          alert('var respond defined');
           if (xhr.readyState == 4 && xhr.status == "200") {
             alert(`Hello ${login_email_username}! You have been successfully login. Welcome to your personal account!`);
           } else {

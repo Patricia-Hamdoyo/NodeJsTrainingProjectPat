@@ -40,7 +40,10 @@ app.get("/api/profiles/:email_or_username/:password", (req, res) => {
     //cari user yg sesuai sm yg dikirim
     const profile = profiles.find(p => ((p.email === http_email_or_username && p.password === http_password) || (p.username === http_email_or_username && p.password === http_password)));
     console.log("\nDone matching data");
-    if (!profile) return res.status(404).send('Invalid login. Please try again.');
+    if (!profile){
+        // alert('Invalid login. Please try again.');
+        return res.status(404).send('Invalid login. Please try again.');
+    }
 
     console.log("Finish Process");
     return res.json(profiles);
