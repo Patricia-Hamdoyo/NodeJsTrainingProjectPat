@@ -117,16 +117,16 @@
           // alert('lewatin xhr.responseText');
           
           var respond = JSON.parse(xhr.responseText);
-          alert('var respond defined');
+          // alert('var respond defined');
           if (xhr.readyState == 4 && xhr.status == "200") {
             alert(`Hello ${login_email_username}! You have been successfully login. Welcome to your personal account!`);
           } else {
-            console.error(respond);
+            //kl username, email, or pass salah, muncul alert buat ngasih tau
+            console.log(respond);
             alert(respond.message);
           }
 		    }
 		    xhr.send(json);
-        //kl username, email, or pass salah, muncul alert buat ngasih tau
       }
     </script>
   </html>

@@ -32,21 +32,21 @@ app.get("/api/profiles", (req, res) => {
 });
 
 app.get("/api/profiles/:email_or_username/:password", (req, res) => {
-    console.log("\nNew Incoming HTTP Request");
+    console.log("\nNew Incoming Login HTTP Request");
 
-    http_email_or_username = req.body.email_or_username;
-    http_password = req.body.password;
+    http_email_or_username = req.params.email_or_username;
+    http_password = req.params.password;
 
     //cari user yg sesuai sm yg dikirim
     const profile = profiles.find(p => ((p.email === http_email_or_username && p.password === http_password) || (p.username === http_email_or_username && p.password === http_password)));
     console.log("\nDone matching data");
     if (!profile){
         // alert('Invalid login. Please try again.');
-        return res.status(404).send('Invalid login. Please try again.');
+        return res.status(404).json('Invalid login. Please try again.');
     }
 
     console.log("Finish Process");
-    return res.json(profiles);
+    return res.json(profile);
 });
 
 app.get('/api/profiles/:id', (req, res) => {
@@ -68,8 +68,18 @@ app.post('/api/profiles', (req, res) => {
         email: req.body.email,
         password: req.body.password
     };
-    profiles.push(profile);
-    return res.json(profile);
+    // console.log("\nNew Incoming Register HTTP Request");
+
+    //cari username/email biar ga double
+    const profile2 = profiles.find(p => (p.email === req.body.email || p.username === req.body.username));
+    console.log("\nDone matching data");
+    if (profile2){
+        // alert('Invalid login. Please try again.');
+        return res.status(404).json('Invalid register. Email or Username had been used by another account. Please try again.');
+    } else{
+        profiles.push(profile);
+        return res.json(profile);
+    }
 });
 
 app.put('/api/profiles/:id', (req, res) => {
