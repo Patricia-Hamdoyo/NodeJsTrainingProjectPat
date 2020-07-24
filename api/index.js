@@ -36,6 +36,9 @@ app.get('/', (req, res) => {
 });
 
 app.get("/api/profiles", (req, res) => {
+    var datetime = new Date();
+    console.log("\n"+datetime);
+    console.log('Profile data has been retrieved.');
     return res.json(profiles);
 });
 
