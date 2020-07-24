@@ -14,6 +14,14 @@ const profiles = [
     { id: 5, fullname: 'Kevin HA', username: 'Kevin', email: 'kevin@hotmail.com', password: 'Kev1n14783' }
 ];
 
+const transactions = [
+    {id: 1, date: '25 APR', desc: 'Transfer money to YPS bank', status: 'completed', fee: '$25', amount: '$50000'},
+    {id: 2, date: '25 MAY', desc: 'Transfer money to CPH bank', status: 'failed', fee: '$2', amount: '$4000'},
+    {id: 3, date: '25 JUNE', desc: 'Withdraw money from CPH bank', status: 'cancelled', fee: '$15', amount: '$30000'},
+    {id: 4, date: '25 JULY', desc: 'Receive money from Tony Stark', status: 'completed', fee: '$20', amount: '$20000'},
+    {id: 5, date: '25 AUG', desc: 'Transfer money to ABC bank', status: 'in progress', fee: '$10', amount: '$10000'}
+];
+
 app.use((req, res, next) => {
     res.set({
         'Access-Control-Allow-Origin': '*',
@@ -29,6 +37,10 @@ app.get('/', (req, res) => {
 
 app.get("/api/profiles", (req, res) => {
     return res.json(profiles);
+});
+
+app.get("/api/transactions", (req, res) => {
+    return res.json(transactions);
 });
 
 app.get("/api/profiles/:email_or_username/:password", (req, res) => {
@@ -82,6 +94,24 @@ app.post('/api/profiles', (req, res) => {
     }
 });
 
+app.post('/api/transactions', (req, res) => {
+    const {error} = validateTransaction(req.body);
+    if (error) {
+        return res.status(400).send(error.details[0].message);
+    }
+
+    const transaction = {
+        id: profiles.length + 1,
+        date: req.body.date,
+        desc: req.body.desc,
+        status: req.body.status,
+        fee: req.body.fee,
+        amount: req.body.amount
+    };
+    transactions.push(transaction);
+    return res.json(transaction);
+});
+
 app.put('/api/profiles/:id', (req, res) => {
     const {error} = validateProfile(req.body);
     if (error) {
@@ -120,4 +150,16 @@ function validateProfile(profile) {
     });
 
     return schema.validate(profile);
+}
+
+function validateTransaction(transaction) {
+    const schema = Joi.object({
+        date: Joi.string().min(5).required(),
+        desc: Joi.string().required(),
+        status: Joi.string().required(),
+        fee: Joi.string().required(),
+        amount: Joi.string().required()
+    });
+
+    return schema.validate(transaction);
 }
