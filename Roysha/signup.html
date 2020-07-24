@@ -143,6 +143,7 @@
             var respond = JSON.parse(xhr.responseText);
             if (xhr.readyState == 4 && xhr.status == "200") {
               alert("You have been successfully registered. You can now login.");
+              window.location.assign('login.html');
             } else {
               console.log(respond);
               alert(respond.message);

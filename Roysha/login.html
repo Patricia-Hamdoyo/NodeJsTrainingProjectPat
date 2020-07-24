@@ -120,6 +120,7 @@
           // alert('var respond defined');
           if (xhr.readyState == 4 && xhr.status == "200") {
             alert(`Hello ${login_email_username}! You have been successfully login. Welcome to your personal account!`);
+            window.location.assign('index.html');
           } else {
             //kl username, email, or pass salah, muncul alert buat ngasih tau
             console.log(respond);

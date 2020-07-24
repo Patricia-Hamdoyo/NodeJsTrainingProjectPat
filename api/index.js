@@ -67,6 +67,12 @@ app.get('/api/profiles/:id', (req, res) => {
     return res.json(profile);
 });
 
+app.get('/api/transactions/:id', (req, res) => {
+    const transaction = transactions.find( t => t.id === parseInt(req.params.id) );
+    if (!transaction) return res.status(404).send('ID not found.');
+    return res.json(transaction);
+});
+
 app.post('/api/profiles', (req, res) => {
     const {error} = validateProfile(req.body);
     if (error) {
@@ -127,6 +133,22 @@ app.put('/api/profiles/:id', (req, res) => {
     return res.json(profile);
 });
 
+app.put('/api/transactions/:id', (req, res) => {
+    const {error} = validateTransaction(req.body);
+    if (error) {
+        return res.status(400).send(error.details[0].message);
+    }
+    const transaction = transactions.find( t => t.id === parseInt(req.params.id) );
+    if (!transaction) return res.status(404).send('ID not found.');
+
+    transaction.date = req.body.date;
+    transaction.desc = req.body.desc;
+    transaction.status = req.body.status;
+    transaction.fee = req.body.fee;
+    transaction.amount = req.body.amount;
+    return res.json(transaction);
+});
+
 app.delete('/api/profiles/:id', (req, res) => {
     const profile = profiles.find( p => p.id === parseInt(req.params.id) );
     if (!profile) return res.status(404).send('ID not found.');
@@ -134,6 +156,15 @@ app.delete('/api/profiles/:id', (req, res) => {
     const index = profiles.indexOf(profile);
     profiles.splice(index, 1);
     return res.json(profile);
+});
+
+app.delete('/api/transactions/:id', (req, res) => {
+    const transaction = transactions.find( t => t.id === parseInt(req.params.id) );
+    if (!transaction) return res.status(404).send('ID not found.');
+
+    const index = transactions.indexOf(transaction);
+    transactions.splice(index, 1);
+    return res.json(transaction);
 });
 
 const port = process.env.PORT || 3000;
