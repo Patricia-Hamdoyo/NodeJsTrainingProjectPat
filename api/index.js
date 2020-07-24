@@ -87,7 +87,7 @@ app.post('/api/profiles', (req, res) => {
     console.log("\nDone matching data");
     if (profile2){
         // alert('Invalid login. Please try again.');
-        return res.status(404).json('Invalid register. Email or Username had been used by another account. Please try again.');
+        return res.status(404).json(`Invalid register. Email or Username had been used by another account. Please try again.`);
     } else{
         profiles.push(profile);
         return res.json(profile);

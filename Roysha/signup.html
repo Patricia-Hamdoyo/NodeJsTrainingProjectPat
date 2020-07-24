@@ -73,7 +73,7 @@
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input type="email" id="register_email" placeholder="example@gmail.com" required>
+            <input type="email" id="register_email" placeholder="example@example.com" required>
           </div>
           <div class="form-group">
             <label>Password</label>
@@ -118,7 +118,11 @@
 
         if( register_pass != register_confirm_pass ){
 					alert('Your password does not match');
-				} else {
+        } 
+        // else if(register_email === !register_email.value.email){
+        //   alert('You need to enter a valid email');
+        // } 
+        else {
 
 					var url = "http://localhost:3000/api/profiles";
 
